@@ -45,6 +45,10 @@ def ingredient_similarity(ingredients1: list[str], ingredients2: list[str]) -> f
 
     Uses Jaccard Similarity on normalized ingredients.
     Also gives bonus weight to matching first 3 ingredients (most important).
+
+    The "First 3 Rule": In cosmetics/personal care, the first 3 ingredients
+    typically make up 70-80% of the product formula. If these match,
+    the products are functionally equivalent.
     """
     if not ingredients1 or not ingredients2:
         return 0.0
@@ -56,13 +60,66 @@ def ingredient_similarity(ingredients1: list[str], ingredients2: list[str]) -> f
     # Base Jaccard similarity
     base_similarity = jaccard_similarity(norm1, norm2)
 
-    # Bonus for matching first 3 ingredients (often the most important)
-    first_3_1 = {normalize_ingredient(i) for i in ingredients1[:3]}
-    first_3_2 = {normalize_ingredient(i) for i in ingredients2[:3]}
-    first_3_match = jaccard_similarity(first_3_1, first_3_2)
+    # First 3 ingredients check (critical for Pink Tax detection)
+    first_3_1 = [normalize_ingredient(i) for i in ingredients1[:3]]
+    first_3_2 = [normalize_ingredient(i) for i in ingredients2[:3]]
 
-    # Weighted average: 60% overall, 40% first-3 match
-    return (base_similarity * 0.6) + (first_3_match * 0.4)
+    # Check exact positional matches (most stringent)
+    positional_matches = sum(1 for a, b in zip(first_3_1, first_3_2) if a == b)
+
+    # Check set overlap (more lenient)
+    first_3_set_1 = set(first_3_1)
+    first_3_set_2 = set(first_3_2)
+    first_3_overlap = jaccard_similarity(first_3_set_1, first_3_set_2)
+
+    # Weighted scoring:
+    # - 40% base Jaccard (overall formula similarity)
+    # - 35% first-3 set overlap (same key ingredients)
+    # - 25% positional bonus (same order = same formulation)
+    positional_bonus = positional_matches / 3.0
+
+    return (base_similarity * 0.40) + (first_3_overlap * 0.35) + (positional_bonus * 0.25)
+
+
+def check_first_three_match(ingredients1: list[str], ingredients2: list[str]) -> dict:
+    """
+    Check if the first 3 ingredients match between two products.
+
+    This is the core of the Pink Tax detection - if the first 3 active
+    ingredients match, the products are functionally identical.
+
+    Returns:
+        dict with match status, count, and details
+    """
+    if not ingredients1 or not ingredients2:
+        return {"matches": False, "count": 0, "details": []}
+
+    first_3_1 = [normalize_ingredient(i) for i in ingredients1[:3]]
+    first_3_2 = [normalize_ingredient(i) for i in ingredients2[:3]]
+
+    matches = []
+    for i, (ing1, ing2) in enumerate(zip(first_3_1, first_3_2)):
+        if ing1 == ing2:
+            matches.append({
+                "position": i + 1,
+                "ingredient": ingredients1[i],
+                "exact_match": True
+            })
+        elif ing1 in ing2 or ing2 in ing1:
+            matches.append({
+                "position": i + 1,
+                "ingredient1": ingredients1[i],
+                "ingredient2": ingredients2[i],
+                "partial_match": True
+            })
+
+    return {
+        "matches": len(matches) >= 2,  # At least 2 of 3 must match
+        "count": len(matches),
+        "threshold": 2,
+        "details": matches,
+        "verdict": "Functionally equivalent" if len(matches) >= 2 else "Different formulation"
+    }
 
 
 def attribute_similarity(attrs1: dict, attrs2: dict) -> float:
@@ -242,22 +299,46 @@ def find_mens_equivalent(
         savings = womens_price - mens_product["price"]
         savings_pct = (savings / womens_price) * 100 if womens_price > 0 else 0
 
-        # Generate match reasons
+        # Generate compelling match reasons for demo
         match_reasons = []
+
+        # Check first 3 ingredients specifically
+        mens_ingredients = mens_product.get("ingredients") or mens_product.get("materials", [])
+        womens_ing = ingredients or (womens_product.get("ingredients") if womens_product else None)
+        if womens_ing and mens_ingredients:
+            first_3_check = check_first_three_match(womens_ing, mens_ingredients)
+            if first_3_check["matches"]:
+                match_reasons.append(f"First {first_3_check['count']} of 3 key ingredients match")
+
         for score_name, score_val, _ in scores:
             if score_val > 0.7:
-                if score_name == "ingredients":
+                if score_name == "ingredients" and not any("ingredient" in r.lower() for r in match_reasons):
                     match_reasons.append("Highly similar ingredient formula")
                 elif score_name == "brand":
                     match_reasons.append(f"Same brand ({mens_product.get('brand', 'Unknown')})")
                 elif score_name == "attributes":
-                    match_reasons.append("Similar product specifications")
+                    # Get specific attribute matches
+                    if womens_product and "attributes" in womens_product:
+                        w_attrs = womens_product["attributes"]
+                        m_attrs = mens_product.get("attributes", {})
+                        if w_attrs.get("blade_count") == m_attrs.get("blade_count"):
+                            match_reasons.append(f"Same blade count ({w_attrs['blade_count']} blades)")
+                        if w_attrs.get("size_oz") and m_attrs.get("size_oz"):
+                            if m_attrs["size_oz"] > w_attrs["size_oz"]:
+                                match_reasons.append(f"Men's is LARGER ({m_attrs['size_oz']}oz vs {w_attrs['size_oz']}oz)")
+                        if w_attrs.get("protection_hours") == m_attrs.get("protection_hours"):
+                            match_reasons.append(f"Same {w_attrs['protection_hours']}-hour protection")
+                    else:
+                        match_reasons.append("Similar product specifications")
 
         if not match_reasons:
             match_reasons.append("Functionally equivalent product")
 
-        if savings_pct > 30:
-            match_reasons.append(f"Significant savings opportunity ({savings_pct:.0f}%)")
+        # Add savings highlight
+        if savings_pct >= 40:
+            match_reasons.append(f"Exceptional savings opportunity ({savings_pct:.0f}%)")
+        elif savings_pct >= 25:
+            match_reasons.append(f"Significant Pink Tax markup ({savings_pct:.0f}%)")
 
         return ProductMatch(
             title=mens_product["title"],

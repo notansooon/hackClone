@@ -154,6 +154,104 @@ WOMENS_PRODUCTS = {
         },
         "retailers": ["target", "walmart", "cvs"],
         "image_url": "https://example.com/dove-pink.jpg"
+    },
+
+    # Additional Products for Target Demo
+    "nivea womens shave balm": {
+        "id": "w007",
+        "title": "Nivea Smooth Skin Shave Balm for Women",
+        "price": 8.97,
+        "category": "personal_care",
+        "subcategory": "shave_care",
+        "brand": "Nivea",
+        "ingredients": [
+            "water",
+            "glycerin",
+            "alcohol denat",
+            "isopropyl palmitate",
+            "chamomile extract",
+            "vitamin E",
+            "pink floral fragrance"
+        ],
+        "attributes": {
+            "size_oz": 3.3,
+            "skin_type": "sensitive",
+            "alcohol_free": False
+        },
+        "retailers": ["target", "walmart", "cvs"],
+        "image_url": "https://example.com/nivea-womens-balm.jpg"
+    },
+
+    "billie razor": {
+        "id": "w008",
+        "title": "Billie Women's 5-Blade Razor Starter Kit",
+        "price": 12.99,
+        "category": "personal_care",
+        "subcategory": "razors",
+        "brand": "Billie",
+        "ingredients": [
+            "5 sharp blades",
+            "charcoal shave soap",
+            "rounded edge",
+            "magnetic holder",
+            "encased in aloe"
+        ],
+        "attributes": {
+            "blade_count": 5,
+            "has_moisture_strip": True,
+            "pivoting_head": True
+        },
+        "retailers": ["target", "walmart"],
+        "image_url": "https://example.com/billie.jpg"
+    },
+
+    "degree women deodorant": {
+        "id": "w009",
+        "title": "Degree Women UltraClear Antiperspirant - Pure Rain",
+        "price": 6.99,
+        "category": "personal_care",
+        "subcategory": "deodorant",
+        "brand": "Degree",
+        "ingredients": [
+            "aluminum zirconium tetrachlorohydrex gly",
+            "cyclopentasiloxane",
+            "stearyl alcohol",
+            "c12-15 alkyl benzoate",
+            "fragrance"
+        ],
+        "attributes": {
+            "size_oz": 2.6,
+            "type": "antiperspirant",
+            "protection_hours": 48
+        },
+        "retailers": ["target", "walmart", "cvs"],
+        "image_url": "https://example.com/degree-women.jpg"
+    },
+
+    # Lotion - Classic Pink Tax Example
+    "olay body lotion": {
+        "id": "w010",
+        "title": "Olay Quench Body Lotion - Shimmer",
+        "price": 9.47,
+        "category": "personal_care",
+        "subcategory": "lotion",
+        "brand": "Olay",
+        "ingredients": [
+            "water",
+            "glycerin",
+            "petrolatum",
+            "isopropyl isostearate",
+            "dimethicone",
+            "niacinamide",
+            "fragrance"
+        ],
+        "attributes": {
+            "size_oz": 20.2,
+            "moisturizing": True,
+            "spf": False
+        },
+        "retailers": ["target", "walmart", "cvs"],
+        "image_url": "https://example.com/olay-women.jpg"
     }
 }
 
@@ -307,6 +405,80 @@ MENS_PRODUCTS = {
         "retailers": ["target", "walmart", "cvs"],
         "image_url": "https://example.com/dove-men.jpg",
         "matches_womens": ["w006"]
+    },
+
+    # Additional Products for Target/Walmart Demo
+    "nivea men shave balm": {
+        "id": "m007",
+        "title": "Nivea Men Sensitive Post Shave Balm",
+        "price": 6.47,
+        "category": "personal_care",
+        "subcategory": "shave_care",
+        "brand": "Nivea",
+        "ingredients": [
+            "water",
+            "glycerin",
+            "alcohol denat",
+            "isopropyl palmitate",
+            "chamomile extract",
+            "vitamin E"
+        ],
+        "attributes": {
+            "size_oz": 3.3,
+            "skin_type": "sensitive",
+            "alcohol_free": False
+        },
+        "retailers": ["target", "walmart", "cvs"],
+        "image_url": "https://example.com/nivea-men-balm.jpg",
+        "matches_womens": ["w007"]
+    },
+
+    "harry's razor": {
+        "id": "m008",
+        "title": "Harry's 5-Blade Razor with Handle",
+        "price": 8.99,
+        "category": "personal_care",
+        "subcategory": "razors",
+        "brand": "Harry's",
+        "ingredients": [
+            "5 german-engineered blades",
+            "flex hinge",
+            "lubricating strip",
+            "rubber grip handle",
+            "precision trimmer"
+        ],
+        "attributes": {
+            "blade_count": 5,
+            "has_moisture_strip": True,
+            "pivoting_head": True
+        },
+        "retailers": ["target", "walmart"],
+        "image_url": "https://example.com/harrys.jpg",
+        "matches_womens": ["w001", "w002", "w008"]
+    },
+
+    "degree men deodorant": {
+        "id": "m009",
+        "title": "Degree Men UltraClear Antiperspirant",
+        "price": 5.49,
+        "category": "personal_care",
+        "subcategory": "deodorant",
+        "brand": "Degree",
+        "ingredients": [
+            "aluminum zirconium tetrachlorohydrex gly",
+            "cyclopentasiloxane",
+            "stearyl alcohol",
+            "c12-15 alkyl benzoate",
+            "fragrance"
+        ],
+        "attributes": {
+            "size_oz": 2.7,
+            "type": "antiperspirant",
+            "protection_hours": 48
+        },
+        "retailers": ["target", "walmart", "cvs"],
+        "image_url": "https://example.com/degree-men.jpg",
+        "matches_womens": ["w009"]
     }
 }
 
@@ -521,7 +693,7 @@ GOLDEN_PAIRS = [
         "match_reasons": [
             "Identical first 3 active ingredients",
             "Both contain aloe vera",
-            "Similar product size",
+            "Men's version is LARGER (10oz vs 7oz)",
             "Both designed for sensitive skin"
         ]
     },
@@ -556,6 +728,73 @@ GOLDEN_PAIRS = [
             "Same brand and quality",
             "Similar fit characteristics",
             "Only sizing system differs"
+        ]
+    },
+    # New pairs for expanded demo
+    {
+        "womens_id": "w007",
+        "mens_id": "m007",
+        "similarity_score": 0.89,
+        "match_reasons": [
+            "Same brand and formula",
+            "Identical first 5 ingredients",
+            "Same size (3.3oz)",
+            "Only fragrance differs"
+        ]
+    },
+    {
+        "womens_id": "w008",
+        "mens_id": "m008",
+        "similarity_score": 0.85,
+        "match_reasons": [
+            "Same blade count (5 blades)",
+            "Both premium DTC brands",
+            "Both have lubricating strips",
+            "Harry's is 31% cheaper"
+        ]
+    },
+    {
+        "womens_id": "w009",
+        "mens_id": "m009",
+        "similarity_score": 0.96,
+        "match_reasons": [
+            "Same brand (Degree)",
+            "Identical active ingredient",
+            "Same 48-hour protection",
+            "Men's has MORE product (2.7oz vs 2.6oz)"
+        ]
+    },
+    {
+        "womens_id": "wc002",
+        "mens_id": "mc002",
+        "similarity_score": 0.92,
+        "match_reasons": [
+            "Same brand (Uniqlo)",
+            "Identical 100% cotton material",
+            "Same quality construction",
+            "Men's is 25% cheaper"
+        ]
+    },
+    {
+        "womens_id": "wc003",
+        "mens_id": "mc003",
+        "similarity_score": 0.90,
+        "match_reasons": [
+            "Same brand (Zara)",
+            "Similar material composition",
+            "Same product line",
+            "Men's is 31% cheaper"
+        ]
+    },
+    {
+        "womens_id": "wc004",
+        "mens_id": "mc004",
+        "similarity_score": 0.88,
+        "match_reasons": [
+            "Same brand (American Eagle)",
+            "Identical material (99% cotton, 1% elastane)",
+            "Same quality denim",
+            "Men's uses actual inch measurements"
         ]
     }
 ]
