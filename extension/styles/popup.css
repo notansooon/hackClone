@@ -1,0 +1,230 @@
+/* PinkVanity Popup Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  background: #f5f5f5;
+}
+
+.popup {
+  width: 320px;
+  min-height: 400px;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #e91e8c 0%, #ff6b9d 100%);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  display: block;
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.status {
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.status.connected {
+  background: rgba(76, 175, 80, 0.8);
+}
+
+.status.disconnected {
+  background: rgba(244, 67, 54, 0.8);
+}
+
+/* Dashboard */
+.dashboard {
+  background: white;
+  margin: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.savings-total {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  padding: 20px;
+  text-align: center;
+}
+
+.savings-total .label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.savings-total .amount {
+  display: block;
+  font-size: 36px;
+  font-weight: 700;
+  color: #e65100;
+  margin: 8px 0;
+}
+
+.savings-total .count {
+  display: block;
+  font-size: 13px;
+  color: #888;
+}
+
+/* Recent Transactions */
+.recent {
+  padding: 16px;
+}
+
+.recent h3 {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.transaction-list {
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.transaction .product {
+  color: #333;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+.transaction .amount {
+  color: #4caf50;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+.empty-state .hint {
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* Actions */
+.actions {
+  padding: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #e91e8c 0%, #ff6b9d 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(233, 30, 140, 0.3);
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #eee;
+}
+
+/* Demo Section */
+.demo-section {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+.demo-section h3 {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.demo-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-demo {
+  flex: 1;
+  padding: 8px;
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-demo:hover {
+  background: #bbdefb;
+}
+
+/* Footer */
+.footer {
+  padding: 12px;
+  text-align: center;
+  color: #aaa;
+  font-size: 11px;
+}

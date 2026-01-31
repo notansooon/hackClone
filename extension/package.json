@@ -1,0 +1,15 @@
+{
+  "name": "pinkvanity-extension",
+  "version": "1.0.0",
+  "description": "PinkVanity Chrome Extension - Shop by Specs, Not Stereotypes",
+  "scripts": {
+    "build": "esbuild src/content-script.ts src/background.ts src/popup.ts src/options.ts --bundle --outdir=dist --minify",
+    "watch": "esbuild src/content-script.ts src/background.ts src/popup.ts src/options.ts --bundle --outdir=dist --watch",
+    "dev": "npm run watch"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.260",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.3.3"
+  }
+}

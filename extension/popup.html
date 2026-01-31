@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PinkVanity</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div class="popup">
+    <header class="header">
+      <h1 class="logo">PinkVanity</h1>
+      <span class="tagline">Shop by Specs, Not Stereotypes</span>
+      <span id="api-status" class="status">Checking...</span>
+    </header>
+
+    <section class="dashboard">
+      <div class="savings-total">
+        <span class="label">Lifetime Savings</span>
+        <span id="total-saved" class="amount">$0.00</span>
+        <span id="transaction-count" class="count">0 swaps</span>
+      </div>
+
+      <div class="recent">
+        <h3>Recent Swaps</h3>
+        <div id="recent-transactions" class="transaction-list">
+          <div class="empty-state">
+            <p>No savings yet!</p>
+            <p class="hint">Browse women's products to find savings opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="analyze-btn" class="btn btn-primary">
+        Analyze This Page
+      </button>
+      <button id="options-btn" class="btn btn-secondary">
+        Settings
+      </button>
+    </section>
+
+    <section class="demo-section">
+      <h3>Demo (Hackathon)</h3>
+      <div class="demo-buttons">
+        <button id="demo-razor" class="btn btn-demo">Test Razor</button>
+        <button id="demo-hoodie" class="btn btn-demo">Test Hoodie</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Fighting the Pink Tax</span>
+    </footer>
+  </div>
+  <script src="dist/popup.js"></script>
+</body>
+</html>

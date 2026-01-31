@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "PinkVanity",
+  "version": "1.0.0",
+  "description": "Shop by Specs, Not Stereotypes. Fight the Pink Tax and find better-fitting clothes.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://www.target.com/*",
+    "https://www.uniqlo.com/*",
+    "https://www.hm.com/*",
+    "https://www.zara.com/*",
+    "https://www.ae.com/*",
+    "https://www.walmart.com/*",
+    "https://www.cvs.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.target.com/*",
+        "https://www.uniqlo.com/*",
+        "https://www.hm.com/*",
+        "https://www.zara.com/*",
+        "https://www.ae.com/*"
+      ],
+      "js": ["dist/content-script.js"],
+      "css": ["styles/overlay.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

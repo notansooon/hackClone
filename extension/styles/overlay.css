@@ -1,0 +1,327 @@
+/* PinkVanity Overlay Styles - Injected into product pages */
+
+#pinkvanity-overlay {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#pinkvanity-overlay.pv-hidden {
+  display: none;
+}
+
+#pinkvanity-overlay * {
+  box-sizing: border-box;
+}
+
+.pv-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  width: 340px;
+  max-height: 500px;
+  overflow: hidden;
+  animation: pv-slide-in 0.3s ease-out;
+}
+
+@keyframes pv-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.pv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #e91e8c 0%, #ff6b9d 100%);
+  color: white;
+}
+
+.pv-logo {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+}
+
+.pv-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.pv-close:hover {
+  opacity: 1;
+}
+
+/* Content */
+.pv-content {
+  padding: 16px;
+}
+
+/* Loading State */
+.pv-loading {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.pv-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #e91e8c;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: pv-spin 1s linear infinite;
+}
+
+@keyframes pv-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pv-loading p {
+  color: #666;
+  margin: 0;
+}
+
+/* No Match State */
+.pv-no-match {
+  text-align: center;
+  padding: 20px;
+}
+
+.pv-no-match .pv-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.pv-subtext {
+  color: #888;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* Match Found */
+.pv-match {
+  position: relative;
+}
+
+.pv-savings-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 200, 83, 0.3);
+}
+
+.pv-big-savings .pv-savings-badge {
+  animation: pv-pulse 2s infinite;
+}
+
+@keyframes pv-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Product Comparison */
+.pv-comparison {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.pv-original,
+.pv-alternative {
+  flex: 1;
+  background: #f8f8f8;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.pv-alternative {
+  background: #e8f5e9;
+  border: 2px solid #4caf50;
+}
+
+.pv-label {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.pv-product-name {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pv-price {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+.pv-price-better {
+  color: #2e7d32;
+}
+
+.pv-arrow {
+  color: #ccc;
+  font-size: 20px;
+}
+
+/* Savings Amount */
+.pv-savings-amount {
+  text-align: center;
+  padding: 12px;
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+.pv-savings-amount strong {
+  color: #e65100;
+  font-size: 18px;
+}
+
+/* Match Reasons */
+.pv-match-reasons {
+  margin: 12px 0;
+}
+
+.pv-reasons-title {
+  font-weight: 600;
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.pv-match-reasons ul {
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+.pv-match-reasons li {
+  color: #555;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+/* Similarity Score */
+.pv-similarity {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin: 8px 0;
+}
+
+/* Size Recommendation */
+.pv-size-recommendation {
+  background: #e3f2fd;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.pv-size-badge {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1565c0;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.pv-fit-title {
+  font-weight: 600;
+  color: #1565c0;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.pv-fit-notes ul {
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+
+.pv-fit-notes li {
+  color: #555;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+/* Swap Button */
+.pv-swap-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #e91e8c 0%, #ff6b9d 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pv-swap-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 30, 140, 0.3);
+}
+
+/* Error State */
+.pv-error {
+  text-align: center;
+  padding: 20px;
+}
+
+.pv-error .pv-icon {
+  font-size: 40px;
+  color: #f44336;
+}
+
+.pv-retry-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pv-retry-btn:hover {
+  background: #eee;
+}
